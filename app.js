@@ -12,13 +12,7 @@ async function loadCharacter() {
 
 async function updateHP(newHP) {
 
-  await fetch(CONFIG.apiUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded"
-    },
-    body: `type=hp&value=${newHP}`
-  });
+  await fetch(CONFIG.apiUrl + `?type=hp&value=${newHP}`);
 
   loadCharacter();
 }
