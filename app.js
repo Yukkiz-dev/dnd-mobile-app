@@ -12,13 +12,12 @@ async function loadCharacter() {
 
 async function updateHP(newHP) {
 
-  const formData = new URLSearchParams();
-  formData.append("type", "hp");
-  formData.append("value", newHP);
-
   await fetch(CONFIG.apiUrl, {
     method: "POST",
-    body: formData
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    body: `type=hp&value=${newHP}`
   });
 
   loadCharacter();
