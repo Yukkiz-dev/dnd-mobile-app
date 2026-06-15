@@ -1,25 +1,49 @@
 async function loadCharacter() {
-  try {
-    const res = await fetch(CONFIG.apiUrl);
-    const data = await res.json();
+  const res = await fetch(CONFIG.apiUrl);
+  const data = await res.json();
 
-    document.getElementById("name").innerText =
-      data.name;
+  window.character = data;
 
-    document.getElementById("class").innerText =
-      "Class: " + data.class;
-
-    document.getElementById("level").innerText =
-      "Level: " + data.level;
-
-    document.getElementById("hp").innerText =
-      data.hp + " / " + data.maxHp;
-
-  } catch (err) {
-    console.error(err);
-    document.getElementById("name").innerText =
-      "Failed to load character";
-  }
+  document.getElementById("name").innerText = data.name;
+  document.getElementById("class").innerText = "Class: " + data.class;
+  document.getElementById("level").innerText = "Level: " + data.level;
+  document.getElementById("hp").innerText = data.hp + " / " + data.maxHp;
 }
 
-loadCharacter();
+async function updateHP(newHP) {
+
+  await fetch(CONFIG.apiUrl, {
+    method: "POST",
+    body: JSON.stringify({
+      type: "hp",
+      value: newHP
+    })
+  });
+
+  loadCharacter();
+}
+
+function setupButtons() {
+
+  const hpBox = document.getElementById("hp");
+
+  const minus = document.createElement("button");
+  minus.innerText = "-";
+
+  const plus = document.createElement("button");
+  plus.innerText = "+";
+
+  minus.onclick = () => {
+    updateHP(window.character.hp - 1);
+  };
+
+  plus.onclick = () => {
+    updateHP(window.character.hp + 1);
+  };
+
+  hpBox.appendChild(document.createElement("br"));
+  hpBox.appendChild(minus);
+  hpBox.appendChild(plus);
+}
+
+loadCharacter().then(setupButtons);
