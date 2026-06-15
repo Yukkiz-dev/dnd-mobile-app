@@ -2,34 +2,35 @@ let character = null;
 
 
 async function loadCharacter() {
-  console.log("API URL:", CONFIG.apiUrl);
-
   const res = await fetch(CONFIG.apiUrl);
-  console.log("RAW RESPONSE:", res);
+  character = await res.json();
 
-  const text = await res.text();
-  console.log("TEXT:", text);
+  document.getElementById("name").innerText = character.name;
+  document.getElementById("class").innerText = `Class: ${character.class}`;
+  document.getElementById("level").innerText = `Level: ${character.level}`;
+
+  document.getElementById("currentHp").innerText = character.hp;
+  document.getElementById("maxHp").innerText = character.maxHp;
 }
 
+async function adjustHP(isHeal) {
+  const input = document.getElementById("hpAmount");
 
-async function updateHP(newHP) {
-  await fetch(CONFIG.apiUrl + `?type=hp&value=${newHP}`);
-  loadCharacter();
-}
+  let amount = Number(input.value);
 
-function changeHP(delta) {
-  let input = document.getElementById("hpInput");
-  let value = Number(input.value);
+  if (isNaN(amount) || amount <= 0) return;
 
-  value += delta;
+  let newHp = isHeal
+    ? Number(character.hp) + amount
+    : Number(character.hp) - amount;
 
-  // safety clamp
-  if (value < 0) value = 0;
-  if (value > character.maxHp) value = character.maxHp;
+  newHp = Math.max(0, Math.min(newHp, Number(character.maxHp)));
 
-  input.value = value;
+  await fetch(
+    `${CONFIG.apiUrl}?type=hp&value=${newHp}`
+  );
 
-  updateHP(value);
+  await loadCharacter();
 }
 
 loadCharacter();

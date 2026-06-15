@@ -15,18 +15,38 @@
     <p id="class">-</p>
     <p id="level">-</p>
 
-  <div class="hp-box">
+  <div class="hp-panel">
 
-    <h2>HP</h2>
+    <div class="hp-actions">
+      <button class="heal-btn" onclick="adjustHP(true)">
+        HEAL
+      </button>
 
-    <input id="hpInput" type="number">
+      <input id="hpAmount" type="number">
 
-    <div class="btn-row">
-      <button onclick="changeHP(-1)">-1</button>
-      <button onclick="changeHP(+1)">+1</button>
+      <button class="damage-btn" onclick="adjustHP(false)">
+        DAMAGE
+      </button>
     </div>
 
-    <p id="hpDisplay"></p>
+    <div class="hp-display">
+      <div>
+        <div class="hp-label">CURRENT</div>
+
+        <div class="hp-current" id="currentHp"></div>
+      </div>
+      <div><div class="hp-slash">/</div></div>
+      <div>
+        <div class="hp-label">MAX</div>
+
+        <div class="hp-max" id="maxHp"></div>
+      </div>
+
+      <div class="hp-title">
+        HIT POINTS
+      </div>
+
+    </div>
 
   </div>
 
