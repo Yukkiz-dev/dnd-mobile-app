@@ -1,43 +1,37 @@
+let character = null;
+
 async function loadCharacter() {
   const res = await fetch(CONFIG.apiUrl);
-  const data = await res.json();
+  character = await res.json();
 
-  window.character = data;
+  document.getElementById("name").innerText = character.name;
+  document.getElementById("class").innerText = "Class: " + character.class;
+  document.getElementById("level").innerText = "Level: " + character.level;
 
-  document.getElementById("name").innerText = data.name;
-  document.getElementById("class").innerText = "Class: " + data.class;
-  document.getElementById("level").innerText = "Level: " + data.level;
-  document.getElementById("hp").innerText = data.hp + " / " + data.maxHp;
+  document.getElementById("hpDisplay").innerText =
+    character.hp + " / " + character.maxHp;
+
+  document.getElementById("hpInput").value = character.hp;
 }
 
 async function updateHP(newHP) {
-
   await fetch(CONFIG.apiUrl + `?type=hp&value=${newHP}`);
-
   loadCharacter();
 }
 
-function setupButtons() {
+function changeHP(delta) {
+  let input = document.getElementById("hpInput");
+  let value = Number(input.value);
 
-  const hpBox = document.getElementById("hp");
+  value += delta;
 
-  const minus = document.createElement("button");
-  minus.innerText = "-";
+  // safety clamp
+  if (value < 0) value = 0;
+  if (value > character.maxHp) value = character.maxHp;
 
-  const plus = document.createElement("button");
-  plus.innerText = "+";
+  input.value = value;
 
-  minus.onclick = () => {
-    updateHP(window.character.hp - 1);
-  };
-
-  plus.onclick = () => {
-    updateHP(window.character.hp + 1);
-  };
-
-  hpBox.appendChild(document.createElement("br"));
-  hpBox.appendChild(minus);
-  hpBox.appendChild(plus);
+  updateHP(value);
 }
 
-loadCharacter().then(setupButtons);
+loadCharacter();

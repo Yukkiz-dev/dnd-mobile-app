@@ -15,10 +15,20 @@
     <p id="class">-</p>
     <p id="level">-</p>
 
-    <div class="hp-box">
-      <h2>HP</h2>
-      <p id="hp">-</p>
+  <div class="hp-box">
+
+    <h2>HP</h2>
+
+    <input id="hpInput" type="number">
+
+    <div class="btn-row">
+      <button onclick="changeHP(-1)">-1</button>
+      <button onclick="changeHP(+1)">+1</button>
     </div>
+
+    <p id="hpDisplay"></p>
+
+  </div>
 
   </div>
 
