@@ -1,0 +1,3 @@
+const CONFIG = {
+  apiUrl: "https://script.googleusercontent.com/macros/echo?user_content_key=AUkAhnQFxofqOtSRT9qLrwCwUESxp4L6OCsOqpxnuUS-v0M8SXS7CSVV3iGwqc9w_7_rqeEuQAmdvhYavScLAhB4gmCv37pSmRWnSx8Qih0uofVhUQzLAtz3ppqyyJJmLfI13XwH53e0CYSp9YZQTkcp31ZKbQvukK7_AwNjbPDHMd9JTzGbfNTYdBsch6P56WZSC3KfnwANXUrO2OOf8sZ4Batr6nugeRJIXGI99hPry3w1dIg6kvyosKsZcObKSX1U5Yo2UY2CEQ4aLnseVbvrIr-OlTJGzQ&lib=MIaAHENij1m1AeeL_fQ3vIgi4MtmUg-Xp"
+};
