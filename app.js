@@ -1,18 +1,16 @@
 let character = null;
 
+
 async function loadCharacter() {
+  console.log("API URL:", CONFIG.apiUrl);
+
   const res = await fetch(CONFIG.apiUrl);
-  character = await res.json();
+  console.log("RAW RESPONSE:", res);
 
-  document.getElementById("name").innerText = character.name;
-  document.getElementById("class").innerText = "Class: " + character.class;
-  document.getElementById("level").innerText = "Level: " + character.level;
-
-  document.getElementById("hpDisplay").innerText =
-    character.hp + " / " + character.maxHp;
-
-  document.getElementById("hpInput").value = character.hp;
+  const text = await res.text();
+  console.log("TEXT:", text);
 }
+
 
 async function updateHP(newHP) {
   await fetch(CONFIG.apiUrl + `?type=hp&value=${newHP}`);
