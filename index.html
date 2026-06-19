@@ -14,42 +14,93 @@
     <h1 id="name">Loading...</h1>
     <p id="class">-</p>
     <p id="level">-</p>
+    <div class="battle">
+      <div class="combat-stats">
 
-  <div class="hp-panel">
+        <div class="stat-card">
+          <div class="stat-label">AC</div>
+          <div class="stat-value" id="ac"></div>
+        </div>
 
-    <div class="hp-actions">
-      <button class="heal-btn" onclick="adjustHP(true)">
-        HEAL
-      </button>
+        <div class="stat-card">
+          <div class="stat-label">INIT</div>
+          <div class="stat-value" id="initiative"></div>
+        </div>
 
-      <input id="hpAmount" type="number">
+        <div class="stat-card">
+          <div class="stat-label">SPEED</div>
+          <div class="stat-value" id="speed"></div>
+        </div>
 
-      <button class="damage-btn" onclick="adjustHP(false)">
-        DAMAGE
-      </button>
+      </div>
+      <div class="hp-panel">
+        <div class="hp-actions">
+          <button class="heal-btn" onclick="adjustHP(true)">
+            HEAL
+          </button>
+
+          <input style="color: white;" id="hpAmount" type="number">
+
+          <button class="damage-btn" onclick="adjustHP(false)">
+            DAMAGE
+          </button>
+        </div>
+
+        <div class="hp-display">
+          <div>
+            <div class="hp-label">CURRENT</div>
+
+            <div class="hp-current" id="currentHp"></div>
+          </div>
+          <div><div class="hp-slash">/</div></div>
+          <div>
+            <div class="hp-label">MAX</div>
+
+            <div class="hp-max" id="maxHp"></div>
+          </div>
+
+          <div class="hp-title">
+            HIT POINTS
+          </div>
+
+        </div>
+        <div class="defense-panel">
+
+          <div class="defense-group">
+            <div class="defense-title">RESISTANCES</div>
+            <div id="resistanceList" class="tag-list"></div>
+          </div>
+
+          <div class="defense-group">
+            <div class="defense-title">IMMUNITIES</div>
+            <div id="immunityList" class="tag-list"></div>
+          </div>
+
+          <div class="defense-group">
+            <div class="defense-title">VULNERABILITIES</div>
+            <div id="vulnerabilityList" class="tag-list"></div>
+          </div>
+
+        </div>
+        <div class="combat-divider"></div>
+
+        <div class="combat-fields">
+
+          <div class="field-group">
+            <label for="tempHpInput">TEMP HP</label>
+
+            <input id="tempHpInput" type="number">
+          </div>
+
+          <div class="field-group">
+            <label for="conditionInput">CONDITION</label>
+
+            <input id="conditionInput" type="text">
+          </div>
+
+        </div>
+      </div>
     </div>
-
-    <div class="hp-display">
-      <div>
-        <div class="hp-label">CURRENT</div>
-
-        <div class="hp-current" id="currentHp"></div>
-      </div>
-      <div><div class="hp-slash">/</div></div>
-      <div>
-        <div class="hp-label">MAX</div>
-
-        <div class="hp-max" id="maxHp"></div>
-      </div>
-
-      <div class="hp-title">
-        HIT POINTS
-      </div>
-
-    </div>
-
-  </div>
-
   </div>
 
   <script src="config.js"></script>

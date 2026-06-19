@@ -54,11 +54,13 @@ button {
 
 .hp-actions button,
 .hp-actions input {
+  width: 100%;
+  height: 44px;
+  box-sizing: border-box;
   height: 44px;
   border-radius: 10px;
   background: transparent;
   border: 2px solid #c62828;
-  color: white;
   text-align: center;
 }
 
@@ -116,6 +118,123 @@ button {
   margin-top: 4px;
 }
 
+.hp-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.combat-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.15);
+  margin: 12px 0;
+}
+
+.combat-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.field-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.field-group label {
+  width: 90px;
+  color: #9ca3af;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.field-group input {
+  flex: 1;
+  height: 38px;
+  padding: 0 12px;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  background: #1f2937;
+  color: white;
+  box-sizing: border-box;
+}
+
+.field-group input:focus {
+  outline: none;
+  border-color: #c62828;
+}
+
+.combat-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  background: #111827;
+  border: 2px solid #c62828;
+  border-radius: 14px;
+  padding: 12px;
+  margin-top: 16px;
+}
+
+.stat-card {
+  background: #1a243b;
+  border: 2px solid #c62828;
+  border-radius: 14px;
+  padding: 12px;
+  text-align: center;
+}
+
+.stat-label {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.stat-value {
+  color: white;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.defense-panel {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.defense-group {
+  background: #111827;
+  border: 2px solid #374151;
+  border-radius: 12px;
+  padding: 6px 8px;
+}
+
+.defense-title {
+  color: #9ca3af;
+  font-size: 0.7rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.defense-tag {
+  background: #1f2937;
+  border: 1px solid #4b5563;
+  border-radius: 999px;
+  padding: 2px 6px;
+  font-size: 0.7rem;
+  color: white;
+  line-height: 1.2;
+}
+
 @media (max-width: 600px) {
   .hp-panel {
     flex-direction: column;
@@ -125,3 +244,4 @@ button {
     width: 100%;
   }
 }
+
