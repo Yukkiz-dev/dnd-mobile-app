@@ -193,7 +193,7 @@ button {
 
 .stat-value {
   color: white;
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 800;
 }
 
@@ -233,6 +233,113 @@ button {
   font-size: 0.7rem;
   color: white;
   line-height: 1.2;
+}
+
+.spells {
+  margin-top: 16px;
+}
+
+.spell-section {
+  background: #111827;
+  border: 2px solid #c62828;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.spell-header {
+  color: #9ca3af;
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.spell-card {
+  background: #1f2937;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.spell-card:last-child {
+  margin-bottom: 0;
+}
+
+.spell-card summary {
+  padding: 10px;
+  cursor: pointer;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unprepared {
+  opacity: 0.6;
+}
+
+.cast-btn {
+  padding: 4px 10px;
+
+  border: none;
+  border-radius: 999px;
+
+  background: #2563eb;
+  color: white;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.cast-btn:disabled {
+  background: #4b5563;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.spell-card summary::-webkit-details-marker {
+  display: none;
+}
+
+.spell-card p {
+  padding: 0 10px 10px;
+  margin: 0;
+  color: #d1d5db;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.spell-slots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.slot-input {
+  width: 40px;
+  padding: 2px 4px;
+
+  text-align: center;
+
+  background: #1f2937;
+  color: white;
+
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+}
+
+.slot-btn {
+  width: 24px;
+  height: 24px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #374151;
+  color: white;
+
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
