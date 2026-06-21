@@ -342,6 +342,177 @@ button {
   cursor: pointer;
 }
 
+.money-panel {
+  margin-top: 16px;
+  padding: 16px;
+
+  background: #1f2937;
+  border-radius: 12px;
+}
+
+.money-header {
+  margin-bottom: 12px;
+
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+}
+
+.money-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+.money-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.money-item label {
+  text-align: center;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  color: #d1d5db;
+}
+
+.money-item input {
+  width: 85%;
+  padding: 8px;
+
+  text-align: center;
+
+  background: #111827;
+  color: white;
+
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+}
+
+.inventory-panel {
+  margin-top: 16px;
+  padding: 16px;
+
+  background: #1f2937;
+  border-radius: 12px;
+}
+
+.inventory-header {
+  margin-bottom: 12px;
+
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.inventory-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.inventory-item {
+  background: #111827;
+  border-radius: 8px;
+}
+
+.inventory-item summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px;
+
+  cursor: pointer;
+}
+
+.item-qty {
+  min-width: 36px;
+
+  text-align: center;
+
+  font-weight: 700;
+  color: #f3f4f6;
+}
+
+.item-name {
+  flex: 1;
+
+  color: white;
+}
+
+.item-meta {
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+.item-description {
+  padding: 0 10px 10px;
+  color: #d1d5db;
+  font-size: 0.85rem;
+}
+
+.item-qty-input {
+  width: 50px;
+
+  padding: 4px;
+
+  text-align: center;
+
+  background: #1f2937;
+  color: white;
+
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.inventory-edit {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding: 12px;
+}
+
+.edit-row {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-row input,
+.inventory-edit textarea {
+  width: 100%;
+
+  padding: 8px;
+
+  background: #111827;
+  color: white;
+
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+}
+
+.inventory-edit textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
 @media (max-width: 1000px) {
   .hp-panel {
     flex-direction: column;

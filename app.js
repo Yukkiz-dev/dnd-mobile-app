@@ -1,6 +1,7 @@
 let character = null;
+let editingInventoryRow = null;
 
-
+/// LOAD CHARACTER
 async function loadCharacter() {
   const res = await fetch(CONFIG.apiUrl);
   character = await res.json();
@@ -19,22 +20,36 @@ async function loadCharacter() {
   document.getElementById("initiative").innerText =
     Number(character.init) > 0 ? `+${character.init}`: character.init;
   document.getElementById("speed").innerText = character.speed + " ft";
+
+  document.getElementById("cpInput").value = character.money.cp;
+  document.getElementById("spInput").value = character.money.sp;
+  document.getElementById("epInput").value = character.money.ep;
+  document.getElementById("gpInput").value = character.money.gp;
+  document.getElementById("ppInput").value = character.money.pp;
   
   renderTags("resistanceList", character.resistance);
   renderTags("immunityList", character.immunitites);
   renderTags("vulnerabilityList", character.vulnerabilites);
   renderSpells();
+  renderInventory();
   document.querySelectorAll(".slot-input").forEach(input => {
 
-  input.addEventListener("change", () => {
+    input.addEventListener("change", () => {
 
-    const level = input.id.match(/\d+/)[0];
+      const level = input.id.match(/\d+/)[0];
 
-    updateSpellSlot(level);
+      updateSpellSlot(level);
+    });
+  }); 
+  document.querySelectorAll(".item-qty-input").forEach(input => {
+
+    input.addEventListener("click", event => {
+      event.stopPropagation();
+    });
+
   });
-});
 }
-
+/// HP
 async function adjustHP(isHeal) {
   const input = document.getElementById("hpAmount");
 
@@ -74,6 +89,8 @@ async function updateCondition() {
 
   await loadCharacter();
 }
+
+//////SPELLS
 async function renderTags(elementId, data) {
 
   const container = document.getElementById(elementId);
@@ -271,6 +288,183 @@ async function castSpell(event, level) {
   input.value = value - 1;
 
   await updateSpellSlot(level);
+}
+////Money
+async function updateMoney(type) {
+
+  const value = document.getElementById(`${type}Input`).value;
+
+  await fetch(
+    `${CONFIG.apiUrl}?type=${type}&value=${encodeURIComponent(value)}`
+  );
+
+  await loadCharacter();
+}
+["cp", "sp", "ep", "gp", "pp"].forEach(type => {
+
+  document
+    .getElementById(`${type}Input`)
+    .addEventListener("change", () => updateMoney(type));
+
+});
+///Inventory
+function renderInventory() {
+
+  const container = document.querySelector(".inventory-list");
+
+  container.innerHTML = "";
+
+  character.inventory.forEach(item => {
+
+    const isEditing = editingInventoryRow === item.row;
+
+    const details = document.createElement("details");
+    details.className = "inventory-item";
+
+    details.open = isEditing;
+
+    if (!isEditing) {
+
+      details.innerHTML = `
+        <summary>
+
+          <span class="item-qty">${item.qty}×</span>
+
+          <span class="item-name">${item.name}</span>
+
+          <span class="item-meta">
+            ${item.cost} · ${item.weight} lb
+          </span>
+
+          <div class="item-actions">
+
+            <button
+              class="icon-btn"
+              onclick="startEditInventory(event, ${item.row})"
+            >
+              ✏️
+            </button>
+
+            <button
+              class="icon-btn delete-btn"
+              onclick="deleteInventoryItem(event, ${item.row})"
+            >
+              🗑️
+            </button>
+
+          </div>
+
+        </summary>
+
+        <div class="item-description">
+          ${formatSpellDescription(item.description)}
+        </div>
+      `;
+
+    } else {
+
+      details.innerHTML = `
+        <div class="inventory-edit">
+
+          <div class="edit-row">
+
+            <input
+              id="editQty"
+              type="number"
+              value="${item.qty}"
+            >
+
+            <input
+              id="editName"
+              type="text"
+              value="${item.name}"
+            >
+
+          </div>
+
+          <div class="edit-row">
+
+            <input
+              id="editCost"
+              type="text"
+              value="${item.cost}"
+            >
+
+            <input
+              id="editWeight"
+              type="text"
+              value="${item.weight}"
+            >
+
+          </div>
+
+          <textarea
+            id="editDescription"
+          >${item.description}</textarea>
+
+          <div class="item-actions">
+
+            <button
+              class="icon-btn save-btn"
+              onclick="saveInventoryItem(${item.row})"
+            >
+              ✔️
+            </button>
+
+            <button
+              class="icon-btn cancel-btn"
+              onclick="cancelEditInventory()"
+            >
+              ✖️
+            </button>
+
+          </div>
+
+        </div>
+      `;
+    }
+
+    container.appendChild(details);
+  });
+}
+function startEditInventory(event, row) {
+
+  event.preventDefault();
+  event.stopPropagation();
+
+  editingInventoryRow = row;
+
+  renderInventory();
+}
+
+function cancelEditInventory() {
+
+  editingInventoryRow = null;
+
+  renderInventory();
+}
+async function saveInventoryItem(row) {
+
+  const payload = {
+    row,
+    qty: document.getElementById("editQty").value,
+    name: document.getElementById("editName").value,
+    cost: document.getElementById("editCost").value,
+    weight: document.getElementById("editWeight").value,
+    description: document.getElementById("editDescription").value
+  };
+
+  console.log(payload);
+
+  editingInventoryRow = null;
+}
+async function updateInventoryQty(row, value) {
+
+  await fetch(
+    `${CONFIG.apiUrl}?type=inventoryQty&row=${row}&value=${encodeURIComponent(value)}`
+  );
+
+  await loadCharacter();
 }
 
 loadCharacter();
